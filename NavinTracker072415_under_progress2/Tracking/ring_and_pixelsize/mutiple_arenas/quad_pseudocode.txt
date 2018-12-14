@@ -1,0 +1,57 @@
+Ring.RingX = [];
+Ring.RingY = [];
+Ring.ComparisonArrayX = [];
+Ring.ComparisonArrayY = [];
+Ring.Area = 0;
+Ring.Level = eps;
+Ring.PixelSize = Prefs.DefaultPixelSize;
+
+pixel_dim = size(background);
+
+imshow(background);
+hold on;
+
+    for(i=1:4)
+        % h = imrect
+        % pos(i,:) = getPosition(h) % [xmin ymin width height]
+
+answer(1) = 'N';
+while answer(1) == 'N'
+    
+    BW = roipoly(background);
+    
+    
+    dim = size(BW);
+    col = round(dim(2)/2);
+    row = min(find(BW(:,col)));
+    
+    i=1;
+    while(isempty(col) || isempty(row))
+        col = round(dim(2)/2) - i;
+        if(isempty(col))
+            col = round(dim(2)/2) + i;
+        end
+        row = min(find(BW(:,col)));
+        i=i+1;
+    end
+    
+    b = bwtraceboundary(BW,[row, col],'N');
+    
+    Ring.RingX = [Ring.RingX b(:,2)];
+    Ring.RingY = [Ring.RingY b(:,1)];
+    
+    hold off
+    imshow(background);
+    hold on;
+    plot(Ring.RingX, Ring.RingY,'g');
+    
+    Ring.ComparisonArrayX = [Ring.ComparisonArrayX ones([length(Ring.RingX) 1])];
+    Ring.ComparisonArrayY = [Ring.ComparisonArrayY ones([length(Ring.RingY) 1])];
+    
+    answer = questdlg('Is the arena properly defined?', 'Manually define multiple arenas', 'Yes', 'No', 'Yes');
+end
+close all;
+
+
+    end
+end

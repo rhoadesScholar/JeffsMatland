@@ -1,0 +1,9 @@
+minimization_functions = {'anneal', 'fminsearch', 'fminlbfgs', 'powell', 'GA'};
+
+object_funcs = {banana, egg, bukin6, holder_table}
+
+GA works for all, but slow
+fminsearch and powell pretty good for smooth problems; fail for complex like egg, bukin6, holder_table
+fminsearch
+
+

@@ -1,0 +1,57 @@
+same data, same model, two different initial guesses, virtually identical fits!
+
+>> t = 0:1:3600;
+
+y = three_state_irreversible_kinetics(t, 0, 1, 0, 5, 20, 1, .001, .005);plot(t,y)
+
+>> f= ezfit(t,y,'y(t) = three_state_irreversible_kinetics(t, 0, 1, 0, 5, eB, eC, k1, k2); eB=6.5; eC=1; k1=0.001; k2=0.001;')
+f = 
+          r: 1
+       chi2: 6.1796e-007
+         df: 3596
+      param: {'eB'  'eC'  'k1'  'k2'}
+          m: [7.9999 0.99998 0.0050003 0.00099997]
+    m_error: [1.7168e-006 9.9457e-007 6.4464e-009 7.5989e-010]
+         m0: [6.5 1 0.001 0.001]
+
+start w/ the actual parameters:
+>> f= ezfit(t,y,'y(t) = three_state_irreversible_kinetics(t, 0, 1, 0, 5, eB, eC, k1, k2); eB=20; eC=1; k1=0.001; k2=0.005;')
+f = 
+          r: 1
+       chi2: 0
+         df: 3596
+      param: {'eB'  'eC'  'k1'  'k2'}
+          m: [20 1 0.001 0.005]
+    m_error: [0 0 0 0]
+         m0: [20 1 0.001 0.005]
+
+But, very very different consequences for the underlying kinetics
+
+actual model:
+>> [y,A,B,C] = three_state_irreversible_kinetics(t, 0, 1, 0, 5, 20, 1, .001, .005);plot(t,y)
+>> figure(2); plot(t, A,'r'); hold on; plot(t,B,'g'); hold on; plot(t,C,'b'); hold off
+
+fitted model:
+>> [y2,A2,B2,C2] = three_state_irreversible_kinetics(t, 0, 1, 0, 5, 8, 1, .005, .001);hold on; plot(t,y2,'r')
+>> figure(2); hold on; plot(t, A2,'c'); hold on; plot(t,B2,'m'); hold on; plot(t,C2,'k'); hold off
+
+The C's overlay perfectly, but A and B curves are very very different
+
+Now, try fixing eC to the correct value (which can be estimated from the plot itself or a double-sigmoid
+float the rate constants and eB
+>> f= ezfit(t,y,'y(t) = three_state_irreversible_kinetics(t, 0, 1, 0, 5, eB, 1, k1, k2); eB = 6.5; k1=0.001; k2=0.001;')
+f = 
+          r: 1
+       chi2: 4.0804e-009
+         df: 3597
+      param: {'eB'  'k1'  'k2'}
+          m: [20 0.001 0.005]
+    m_error: [1.3073e-006 2.4904e-011 3.9648e-010]
+         m0: [6.5 0.001 0.001]
+correct solution found!
+
+Oddly enough, the eC fitted earlier matches the fixed eC of 1
+Hmm...
+
+
+

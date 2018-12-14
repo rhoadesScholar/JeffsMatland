@@ -1,0 +1,26 @@
+function ext2 = AutomatedRoamDwellAnalysis(folder)
+    PathofFolder = sprintf('%s/',folder);
+    dirList = ls(PathofFolder);
+    NumFolders = length(dirList);
+    for(i = 3:NumFolders)
+        string1 = deblank(dirList(i,:)); 
+        PathName = sprintf('%s/%s/',PathofFolder,string1);
+        fileList = ls(PathName);
+        display(fileList)
+        numFiles = length(fileList);
+        for(j=3:numFiles)
+            string2 = deblank(fileList(j,:));
+            [pathstr, FilePrefix, ext, versn] = fileparts(string2);
+            [pathstr2, FilePrefix2, ext2, versn2] = fileparts(FilePrefix);
+            display(ext2(1))
+%             if(char(ext2)==char('.finalTracks'))
+%                 fileIndex = j;
+%             end
+        end
+%         fileName = deblank(fileList(fileIndex,:));
+%         fileToOpen = sprintf('%s%s',PathName,fileName);
+%         load(fileToOpen);
+%         checkBimodality(finalTracks);
+    end
+end
+        

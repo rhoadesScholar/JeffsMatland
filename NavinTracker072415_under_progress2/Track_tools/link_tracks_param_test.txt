@@ -1,0 +1,14 @@
+D:\strains\dat1_chop\power_titrate\sansFood\2_17_10.1.1.Tracks.mat
+
+670 tracks
+
+10 sec
+MaxTrackLinkDirectionDiff   numtracks
+0                           670
+5                           655
+10                          593
+15                          542
+30                          409
+45                          354
+60                          305
+90                          277

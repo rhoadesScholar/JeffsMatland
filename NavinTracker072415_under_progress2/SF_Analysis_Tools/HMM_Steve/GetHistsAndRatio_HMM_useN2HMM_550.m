@@ -1,0 +1,50 @@
+function [dwellStateDurations roamStateDurations FractionDwelling FractionRoaming] = GetHistsAndRatio_HMM_useN2HMM_550(finalTracks,Date,Genotype,N2_TR,N2_E)
+    cmap = [jet(255)];
+    colormap(cmap);
+    finalTracks2 = finalTracks;
+    %[stateList startingStateMap] = getStateSliding_Diff(finalTracks,finalTracks2,450,30,3,35,57,3);
+    [expNewSeq expStates estTR estE] = getHMMStatesSpecifyTRandE_2_550(finalTracks,30,N2_TR,N2_E)
+    %%%%%%%%%%%%%%%%%CHANGE BACK
+    [stateDurationMaster dwellStateDurations roamStateDurations] = getStateDurations_HMM(expStates,.333);
+    allStateCalls = []
+    for(j = 1:(length(expStates)))
+        
+        allStateCalls = [allStateCalls expStates(j).states];
+    end
+    TotalBins = length(allStateCalls);
+    numDwellBins = length(find(allStateCalls==1));
+    FractionDwelling = numDwellBins/TotalBins;
+    FractionRoaming = 1 - FractionDwelling;
+    a = zeros(2,2);
+    a(1,1:2) = [FractionDwelling FractionRoaming];
+    subplot(1,3,1);
+    bar(a,'stack');
+    legend('dwelling','roaming');
+    ylabel('fraction of time');
+    subplot(1,3,2);
+    if(length(dwellStateDurations>0))
+    hist(dwellStateDurations(1,:)/180,150);
+    end
+%     ax_hdl = get(gcf,'CurrentAxes');
+%     current = axis(ax_hdl);
+%     axis([0 (4500/180) 0 current(4)])
+    title('Dwell State Durations');
+    xlabel('duration of dwell state (min)');
+    ylabel('number of observed states');
+    subplot(1,3,3);
+    if(length(roamStateDurations)>0)
+    hist(roamStateDurations(1,:)/180,150);
+    end
+%     ax_hdl = get(gcf,'CurrentAxes');
+%     current = axis(ax_hdl);
+%     axis([0 (4500/180) 0 current(4)])
+    title('Roam State Durations');
+    xlabel('duration of roam state (min)');
+    ylabel('number of observed states');
+    
+    VidName = sprintf('%s.%s',Date,Genotype);
+
+    set(1,'Name',VidName);
+    save_figure(1,'',VidName,'hists');
+
+end

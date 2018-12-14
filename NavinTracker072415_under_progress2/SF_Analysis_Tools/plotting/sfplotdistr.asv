@@ -1,0 +1,11 @@
+function sfplotdistr(vect)
+    minimumdur = ceil(min(vect);
+    maximumdur = max(vect);
+    
+    numObserv = length(vect);
+    alldata = [];
+    for (i = minimumdur:1:maximumdur)
+        alldata(i) = length(find(vect>=i));
+    end
+    plot(minimumdur:1:maximumdur,alldata)
+end

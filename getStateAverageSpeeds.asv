@@ -1,0 +1,23 @@
+function [dwellAvgSpeed, dwellAvgAngSpeed, roamAvgSpeed, roamAvgAngSpeed] = getStateAverageSpeeds(finalTracks)
+    
+    d = 1;
+    r = 1;
+    for (i=1:length(finalTracks))
+        for (j=1:length(finalTracks(i).HMMstates))
+            if (finalTracks(i).HMMstates(j)==1)
+                dwellTrackAvgs(d)= finalTracks(i).Speed(j);
+                dwellTrackAngularAvgs(d)= finalTracks(i).Speed(j);
+                d=d+1;
+            end
+            if (finalTracks(i).HMMstates(j)==2)
+                roamTrackAvgs(r)= finalTracks(i).Speed(j);
+                roamTrackAngularAvgs(r)= finalTracks(i).Speed(j);
+                r=r+1;
+            end
+        end
+    end
+    
+    dwellAvgSpeed = nanmean(dwellTrackAvgs);
+    dwellAvgAngularSpeed = nanmean(dwellTrackAngularAvgs);
+    roamAvgSpeed = nanmean(roamTrackAvgs);
+    roamAvgAngularSpeed = nanmean(roamTrackAngularAvgs);

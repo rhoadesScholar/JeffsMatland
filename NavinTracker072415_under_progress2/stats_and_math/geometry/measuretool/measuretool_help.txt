@@ -1,0 +1,89 @@
+This tool (measure tool) is intended to aid measuring on images.
+In order to do this the image needs to have some visual scale to calibrate the pixel to length ratio on, e.g. scale bar, ruler.
+
+Updates can be found at:
+http://www.mathworks.nl/matlabcentral/fileexchange/25964-image-measurement-utility
+
+Quick Help
+=============================
+ - Select an image using <Browse>
+ - Press <Calibrate> and select two points of which the distance is known
+ - Use the zoom function of the toolbar and correct your initial selection
+ - Double Click the line to confirm
+ - Enter the length of the selected distance in the calibration panel
+ - Calibration is ready:
+ - Use the <Distance>, <Spline>, <Caliper>, <Circle>, or <Angle> tools to measure
+ - Each measurement can be deleted using <Delete> or modified using <Edit>
+
+Image processing toolbox tools
+=============================
+The tool is intended for high quality measurements, and is therefore build around tools like "imline" from the image processing toolbox. These tools are powerful because they allow you to select, zoom, re-adjust, and than confirm your selection. As a result, all measurements require several "clicks", the first set of clicks can be quick, and allow you to place the measurement tool, where after the tool can be modified using its control points, when ready double click on the tool to finalize the selection. Finally, it is important that the full sequence of "clicks" is finished before a new measurement is started, otherwise the GUI will terminate less gracefully. If the image processing toolbox is unavailable, or a Matlab version older then 2009b (7.9.0) is used, then the <Quick> option can be used (optionally with <Zoom Select>) to bypass the "imline" selection tools.
+
+Listbox of images
+=============================
+After selecting an image (using the <Browse...> button), a list of all images in the folder is loaded in the tool, this allows the measurement on several files without the need to re-calibrate, which off coarse only works if the images actually share the same scale, e.g. like in a movie.
+
+Status
+=============================
+Status information is shown here.
+
+Calibrate
+=============================
+It goes without saying that each measurement depends on the calibration, so it is worth spending some time on getting it right. Furthermore, the calibration can be re-done at any time, all measurements will be updated accordingly.
+
+Measure
+=============================
+<Distance>: measure the distance between two points, first place two initial points, then correct and confirm the selected distance by double clicking on the line.
+<Caliper>: measure the perpendicular distance between a line and a point, first place two initial points, then correct and confirm (double click) the position of the line, now place a point at a distance perpendicular to the line, again correct the position and confirm with a double click.
+<Spline>: measure the length of a multi-point spline. This tool is very similar to the "Distance" tool, except it handles more than 2 points and interpolates them using the spline interpolation method of interp1 (tip: set the method to "linear" in the options menu to measure polygons).
+<Circle>: measure a radius by placing a circle, first select the center of the circle and then one point on the circle, the position and size of the circle can be corrected, confirm with a double click on the circle. The selection behavior changes slightly when the "Quick" option is selected, then five points need to be selected through which a circle is fitted.
+<Angle>: measure an angle between two lines, first select the intersection and then two more points to one for each line, the three point line can be moved and the position of the points can be moved by dragging them with the mouse, double click on the line to confirm the measurement.
+<Edit>: Reposition the points of one measurement which can be selected from a list
+<Delete>: Delete one or multiple measurements using a list
+
+Plot
+=============================
+In this panel a set of plotting options can be found, which switch on (or off) visual objects. <Points>, <Lines>, and, <Text>, not quite unexpectedly, enable (or disable) to plotting of points, lines, and texts. When <All> is enabled then measurements from all images in the "List" are shown simultaneously, when disabled then only measurements from the current image are shown. <Intensity> switches the text from the spatial quantity to the average intensity of the pixels underneath the measured object. For "Distance", "Angle", and "Spline" the intensity is calculated by interpolating the pixel values on discretized points of the measured (and plotted) line, and average those. For "Caliper" the intensity is calculated in the same way but only for the "perpendicular" line, i.e., the line connecting the selected line and point. For "Circle" the average intensity is calculated for all pixels inside the circle. Actually, for all measurement types except "Circle", the intensity profiles are stored and can be found in the myname(k).profile matrix (see "save to workspace"), where the first column is the distance along the measurement and the second column the corresponding intensity.
+
+Save
+=============================
+<Workspace>: A popup asks for a variable name, to which all measurements are stored to the base workspace in the form of a structure. The measurement data can be found by typing myname(k) where k is an integer selecting the specific measurement.
+<Text>: A popup asks for a .txt file name, after which all data is written to the file.
+<Image (png)>: A popup asks for a .png file name, after which the "measure window" is saved as a .png file (note, the image is anti-aliased which takes some time)
+<Image (pdf)>: A popup asks for a .pdf file name, after which the "measure window" is saved as a .pdf file
+
+Current Figure
+=============================
+Calling measuretool(gcf) will open the tool for use on the current figure, for instance one created with imagesc(x,y,Z). In this mode all file selection tools are disabled. Typically, such figures have non-square pixels for which the calibration process is not well defined, therefore, the axes are assumed to be calibrated (i.e. have meaningful values) and the calibration options are also disabled.
+
+Changelog
+=============================
+version 1.13 by Jan Neggers, Jan,12,2012
+   - added feature to measure the intensity (as suggested by Jakub)
+   - included the "Plot" section in the help
+   - simplified the save to workspace structure
+
+version 1.12 by Jan Neggers, Dec,7,2011
+   - most GUI buttons are now disabled during measurements to prevent confusion
+   - added a "clear" button to reset the tool
+   - added more input checks for the "options" menu
+
+version 1.11 by Jan Neggers, Sept,29,2011
+   - minor update, added the possibility to use a figure window which is already open (e.g. measuretool(gcf))
+   - changed the zoom select from absolute to relative
+   - all buttons are now disabled during measurement
+
+version 1.10 by Jan Neggers, Sept,27,2011
+   - entire overhaul of the gui, added quite a few features, some of which as proposed by Mark Hayworth
+
+version 1.00 by Jan Neggers, Sept,22,2011
+   - fixed some bugs related to the help
+   - improved displaying in micrometers
+   - added the four <Save> buttons
+
+version 0.92 by Jan Neggers, Apr,06,2010
+   - fixed grayscale images showing in color (after comment from Till)
+   - improved help file displaying
+
+version 0.91 by Jan Neggers, Nov,30,2009
+   - first version

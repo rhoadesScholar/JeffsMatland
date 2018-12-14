@@ -1,0 +1,19 @@
+for aligning fluor stacks 
+    cherry standard - ttx3 (AIY), srh-142 (ADF), tdc1 (RIM, RIC), glr3 (RIA), str3 (ASI), odr7 (AWA), dat1 (CEP, ADE), flp17 (BAG) :his44:mCherry
+    focus on pharynx lumen. 25 slices? 50 slices?
+    get 3D matrix of mCherry channel for standard and test
+    adjust test to maximize correlation between standard and test   imresize  imrotate imregister rigid3D
+    Do imregister w/ test candidate center slice w/ target center slice
+        get goodness of fit over all slices
+        repeat w/ next test canidate center slice (+/- 2 or 3 slices)
+        degrees of freedom: X-translation, Y-translation, Z-translation, 
+        initial X-Y guess - manually draw line from nose tip to grinder, and also isthmus boundries perpendicular to AP axis
+            rotate and scale target to fix (analytic solution?)
+            translate to intersection, rotate/scale - analytic
+        w/ optimizer, fine-tune to align centers of mass of fluor cells - detect by threshold (histogram-based), bwconncomp, regionprops Centroid
+        then, the actual volumes
+For standard, manually assign each nucleus X-Y-Z a name based on h20:GFP/normarski
+        stack image, click get x-y, input name
+        find GFP blobs, assign code number
+        once labelled , assign all pixels of that blob that name; click on pixel, get name
+        slider for z-stack

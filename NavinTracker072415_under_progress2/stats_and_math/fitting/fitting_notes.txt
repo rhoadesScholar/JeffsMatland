@@ -1,0 +1,24 @@
+optimize aic sum 
+
+x-y = x state ON transition, y state OFF transition
+
+four models: #1 (2-2), #2 (2-3), #3 (3-2), #4 (3-3)
+              
+string that describes the model vector: 1-4-3-2-1-3-4 1st observable is 2-2, 2nd observable is 3-3, etc
+4^num_observables combinations possible
+
+for(gen=1:num_gen)
+
+aic=0;
+for(i=1:model)
+for(k=1:observable)
+    if(observable_model = i
+        global-split-fit model i only for the observables using that model
+        aic += sum(aic)
+    end
+end
+end
+
+metropolis
+
+end

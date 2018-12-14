@@ -1,0 +1,21 @@
+%%%slideSize and binSize are in frames
+
+function binnedSpeedSliding = binSpeedSliding(speedData, binSize, slideSize)
+    
+    i= 1;
+    while((i+binSize) <= (length(speedData)))
+        startIn = 
+
+
+
+
+
+    binOverlap = binSize - slideSize;
+    numbBins = ((length(speedData))/binSize)+(binOverlap*((length(speedData))/binSize));
+	for (i=1:numbBins)
+		startInd = (slideSize*i) - (slideSize -1);
+		endInd = (i*slideSize);
+		currentData = speedData(startInd:endInd);
+        binnedSpeedSliding(i) = mean(currentData);
+    end
+end

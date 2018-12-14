@@ -1,0 +1,47 @@
+HOW TO RUN MATLAB WITH ALTERNATE PROCESS PRIORITIES IN WINDOWS:
+
+(1) Copy an extra shortcut for starting Matlab onto your Windows desktop.
+You can usually do this by dragging an existing shortcut onto the desktop
+and holding the ALT button while unclicking.
+
+(2) Rename the extra shortcut "Matlab low" or "Matlab high" or whatever
+process priority you intend to use. (Once you're done, every time you
+start Matlab by clicking this shortcut, the process will start with the
+process priority you set below.)
+
+(3) Right-click on this new shortcut and select "Properties" from the
+menu.
+
+(4) Change the entry in the "Target" field to the following, according
+to your process priority preference. The executable file locations are
+defaults and will work for most users; HOWEVER, you may have to adjust
+them if your system keeps the files in different locations. If so, simply
+do a search from the Windows "Start" button to find the files on your
+computer named "cmd.exe" and "MATLAB.exe" and replace the paths below
+with the paths that you obtain.
+
+For LOW process priority, copy this into the "Target" field:
+C:\WINDOWS\system32\cmd.exe /c start /low C:\MATLAB704\bin\win32\MATLAB.exe
+
+For BELOW NORMAL process priority:
+C:\WINDOWS\system32\cmd.exe /c start /belownormal C:\MATLAB704\bin\win32\MATLAB.exe
+
+For NORMAL process priority:
+C:\WINDOWS\system32\cmd.exe /c start /normal C:\MATLAB704\bin\win32\MATLAB.exe
+
+For ABOVE NORMAL process priority:
+C:\WINDOWS\system32\cmd.exe /c start /abovenormal C:\MATLAB704\bin\win32\MATLAB.exe
+
+For HIGH process priority:
+C:\WINDOWS\system32\cmd.exe /c start /high C:\MATLAB704\bin\win32\MATLAB.exe
+
+For REALTIME process priority:
+C:\WINDOWS\system32\cmd.exe /c start /realtime C:\MATLAB704\bin\win32\MATLAB.exe
+
+(5) Click "Apply" and close the window.
+
+(6) Use the new shortcut as usual. Congratulations.
+
+(7) Keep in mind, at "low" priority, Matlab will only calculate when
+nothing else is running, and at "realtime" or even "high" priority,
+Matlab may hang your system until it is finished its calculations.

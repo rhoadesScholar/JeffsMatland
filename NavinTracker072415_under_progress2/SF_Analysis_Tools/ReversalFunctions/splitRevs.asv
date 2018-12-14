@@ -1,0 +1,36 @@
+function [Rev_Dwell Rev_Roam] = splitRevs(finalTracks,TrackNumber)
+Rev_Dwell = [];
+Rev_Roam = [];
+finalTracks2 = finalTracks;
+[stateList startingStateMap] = getStateSliding(finalTracks,finalTracks2,450,30,3,45,3);
+[stateDurationMaster dwellStateDurations roamStateDurations] = getStateDurations(stateList,.333);
+allStateCalls = [];
+for(j = 1:(length(stateList)))
+
+    allStateCalls = [allStateCalls stateList(j).finalstate];
+end
+TotalBins = length(allStateCalls);
+numDwellBins = length(find(allStateCalls==1));
+numRoamBins = TotalBins - numDwellBins;
+display (TotalBins)
+for(j = 1:length(TrackNumber))
+    Revs = finalTracks(j).Reversals(:,1)
+    
+    DwellFrames = find(stateList(j).finalstate==1);
+    
+    DwellIndex = [];
+    RoamIndex = [];
+    for (i=1:length(Revs))
+        a = find(DwellFrames==Revs(i));
+        
+        if(a>0)
+            DwellIndex = [DwellIndex i];
+        else
+            RoamIndex = [RoamIndex i];
+        end
+        
+    end
+    Rev_Dwell = [Rev_Dwell; Revs(DwellIndex,:)];
+    Rev_Roam = [Rev_Roam; Revs(RoamIndex,:)];
+end
+

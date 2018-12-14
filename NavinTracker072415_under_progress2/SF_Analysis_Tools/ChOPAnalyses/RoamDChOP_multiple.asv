@@ -1,0 +1,7 @@
+[ChOPDetails1 ConDetails1] = RoamsDuringChOP(allRIFAIY,900,960);
+[ChOPDetails2 ConDetails2] = RoamsDuringChOP(allRIFAIY,1920,1980);
+[ChOPDetails3 ConDetails3] = RoamsDuringChOP(allRIFAIY,2940,3000);
+[ChOPDetails4 ConDetails4] = RoamsDuringChOP(allRIFAIY,3960,4020);
+[ChOPDetails5 ConDetails5] = RoamsDuringChOP(allRIFAIY,4980,5040);
+[ChOPDetails6 ConDetails6] = RoamsDuringChOP(allRIFAIY,6000,6060);
+AllChOP = [ChOPDwellStateDurations1 ChOPDwellStateDurations2 ChOPDwellStateDurations3 ChOPDwellStateDurations4 ChOPDwellStateDurations5 ChOPDwellStateDurations6];

@@ -1,0 +1,13 @@
+
+starttime   stoptime    channel power   period 
+
+60 90 1 1000 
+70 80 2 500 0.03125 
+150 165 1 1000
+
+at t = column1, 
+duration = stoptime - starttime
+start /b LED_control.exe channel power [duration] [strobeperiod_if_relevant]
+start /b LED_control.exe 0
+
+

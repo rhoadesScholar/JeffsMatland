@@ -1,0 +1,10 @@
+Tracker - tiny change - 300Frames
+processMovieFrame - if clauses to get into adjustments
+adjust threshold - very different
+created getDefaultWorms
+default threshold - very different
+definePrefs - minSpeed, which defines interframe distance
+avireadtogray is different
+
+
+linkTracks - changed with a few if clauses - suitable when worms are not densely packed

@@ -1,0 +1,36 @@
+usb3
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 53.567545 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 53.236222 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 53.705702 seconds.
+
+D: drive
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 52.332192 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 52.128221 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 52.015970 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.580167 seconds.
+
+C: drive
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.896021 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.418153 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.510866 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.616818 seconds.
+
+eSATA
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.915996 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.841716 seconds.
+>> tic; aviread_to_gray;  for(i=1:100) Mov = aviread_to_gray('010712_N2_imp.avi',i); Mov=[]; end; toc
+Elapsed time is 51.605426 seconds.
+
