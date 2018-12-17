@@ -1,7 +1,7 @@
 function M = animate_markers_aligned_fullmovie(mocapstruct,frame_inds,fighand)
 %matlab_fr = 10;
 if nargin<3
-h=figure(370)
+    h=figure(370)
 else
     h=fighand;
 end
