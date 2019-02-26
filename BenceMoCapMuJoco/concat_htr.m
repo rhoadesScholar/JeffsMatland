@@ -106,7 +106,7 @@ root_nodes = [];
 skeleton_names = fieldnames(skeleton.tree);
 for mm = 1:numel(skeleton_names)
     if (strcmp(skeleton.tree.(skeleton_names{mm}),'GLOBAL'))
-root_nodes = cat(1,root_nodes,mm);
+        root_nodes = cat(1,root_nodes,mm);
     end
 end
 

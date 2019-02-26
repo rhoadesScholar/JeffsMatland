@@ -1,4 +1,4 @@
-function skeleton = danceSkeleton(skeleton, varargin)
+function skeleton = danceSkeleton(skeleton, varargin)##NOT FINISHED
     
     %parse inputs/initialize variables
     displayFrameRate_temp = 10; %hard coded default framerate
@@ -52,7 +52,9 @@ function skeleton = danceSkeleton(skeleton, varargin)
 end
 
 function limbPos = getLimbPositions(skeleton)
-    
+    % limbvec = zeros(3,1,nframes);
+    %limbvec(2,1,:) = skeleton.(limbnames{kk}).SF*1;
+    %limbposition.(limbnames{kk}) = cat(2,transmatrix,transmatrix+ mtimesx(rotmatrix,limbvec));
     hier = getTransformHierarchy(skeleton.tree, skeleton.limbNames, 'GLOBAL');
 end
 
@@ -61,4 +63,11 @@ function hier = getTransformHierarchy(tree, limbs, parent)
     for k = 1:numel(kids)
         hier.(kids{k}) = getTransformHierarchy(tree, limbs, kids{k});
     end
+end
+
+function childPos_global = rotatechild(childPos_local, parentRot,parentTrans)
+
+    childPos_global = cat(2, parentTrans+mtimesx(parentRot,childPos_local(:,1,:)),...
+        parentTrans+mtimesx(parentRot,childPos_local(:,2,:)));
+
 end
